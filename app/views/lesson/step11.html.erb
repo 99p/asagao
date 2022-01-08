@@ -1,0 +1,4 @@
+<p>
+  <%= sprintf("Jinko%sNin, Menseki%.0fHeihoKM, Mitsudo%.2fNin/HeihoKM",
+              @population.to_s(:delimited), @surface, @population/@surface)%>
+</p>
