@@ -1,4 +1,5 @@
 class Member < ApplicationRecord
+  has_secure_password
 
   validates :number, presence: true,
     numericality:{
@@ -17,6 +18,9 @@ class Member < ApplicationRecord
   validates :email, presence: true, 'valid_email_2/email': true
 
   validates :full_name, presence: true, length: { maximum:20 }
+
+  attr_accessor :current_password
+  validates :password, presence: { if: :current_password }
 
   class << self #クラスメソッド
     def search(query)
