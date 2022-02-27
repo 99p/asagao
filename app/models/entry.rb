@@ -5,7 +5,7 @@ class Entry < ApplicationRecord
 
   class << self
     def status_text(status)
-      l18n.t("activerecord.attributes.entry.status_#{status}")
+      I18n.t("activerecord.attributes.entry.status_#{status}")
     end
 
     def status_options
@@ -19,6 +19,6 @@ class Entry < ApplicationRecord
 
   scope :common, -> { where(status: "public") }
   scope :published, -> { where("status <> ?", "draft") }
-  scope :full, ->(member) { where("status <> ? OR member_id = ?", "draft", member:id) }
+  scope :full, ->(member) { where("status <> ? OR member_id = ?", "draft", member.id) }
   scope :readable_for, ->(member) { member ? full(member) : common }
 end
